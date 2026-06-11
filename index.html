@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1180, initial-scale=1.0">
+    <title>NZee'sWDAcademy</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Lora&family=Gulzar&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        :root {
+            color-scheme: dark;
+            color: #fff;
+            background: radial-gradient(circle at top, rgba(245, 170, 255, 0.22), transparent 35%),
+                        radial-gradient(circle at 20% 10%, rgba(255, 180, 190, 0.18), transparent 26%),
+                        radial-gradient(circle at 80% 25%, rgba(125, 196, 255, 0.2), transparent 22%),
+                        #0f0b18;
+        }
+
+        html, body {
+            min-height: 100%;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            background: transparent;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .section {
+            width: min(100%, 1180px);
+            margin-inline: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 0;
+            font-size: 4rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .section {
+            background: transparent;
+        }
+        
+        .divider {
+            margin-inline: auto;
+        }
+
+        .header-space {
+            width: 100%;
+            min-height: 260px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .status-bar {
+            width: min(100%, 1180px);
+            margin-inline: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            padding: 1rem 1.25rem;
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 28px;
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.16);
+            color: #fff;
+            font-family: 'Times New Roman', serif;
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+        }
+
+        .status-left {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .status-item {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .status-link {
+            color: inherit;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-link:hover,
+        .status-link:focus {
+            text-decoration: none;
+            opacity: 0.9;
+        }
+
+        .status-icon {
+            color: inherit;
+            opacity: 0.85;
+            font-size: 1rem;
+            line-height: 1;
+        }
+
+        .status-dropdown {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .status-dropdown-button {
+            background: rgba(0, 0, 0, 0.22);
+            color: #fff;
+            font-family: 'Times New Roman', serif;
+            border: 1px solid rgba(126, 121, 121, 0.3);
+            border-radius: 999px;
+            padding: 0.5rem 1rem;
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-dropdown-button:hover,
+        .status-dropdown-button:focus {
+            background: rgba(0, 0, 0, 0.28);
+            border-color: rgba(255, 255, 255, 0.55);
+        }
+
+        .register-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.55rem 1rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            font-family: 'Times New Roman', serif;
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            text-decoration: none;
+            transition: background 0.25s ease, transform 0.25s ease;
+        }
+
+        .register-button:hover,
+        .register-button:focus {
+            background: rgba(255, 255, 255, 0.18);
+            transform: translateY(-1px);
+        }
+
+        .status-dropdown-menu {
+            position: absolute;
+            right: 0;
+            top: calc(100% + 1rem);
+            min-width: 220px;
+            background: rgba(0, 0, 0, 0.28);
+            border: 1px solid rgba(126, 121, 121, 0.3);
+            border-radius: 16px;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(-8px) scaleY(0.96);
+            transform-origin: top right;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 10;
+        }
+
+        .status-dropdown.open .status-dropdown-menu {
+            opacity: 1;
+            transform: translateY(0) scaleY(1);
+            pointer-events: auto;
+        }
+
+        .status-dropdown-item {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-family: 'Times New Roman', serif;
+            text-align: left;
+            padding: 0.85rem 1rem;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: background 0.2s ease;
+        }
+
+        .status-dropdown-item:hover,
+        .status-dropdown-item:focus {
+            background: rgba(255, 255, 255, 0.08);
+            outline: none;
+        }
+
+        .status-dropdown-item[data-url]::after {
+            content: '→';
+            float: right;
+            opacity: 0.75;
+            font-size: 1rem;
+            margin-left: 0.5rem;
+        }
+
+        .fade-item {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .status-item span {
+            opacity: 0.85;
+        }
+
+        .header-title {
+            font-family: 'Cinzel Decorative', cursive;
+            font-weight: 700;
+            color: #fff;
+            font-size: 3rem;
+            letter-spacing: 0.12em;
+            text-align: center;
+            padding: 0 1rem;
+        }
+
+        .box-heading {
+            font-family: 'Lora', serif;
+            font-weight: 700;
+            color: #fff;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .box-subtext {
+            font-family: Arial, sans-serif;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.88);
+            line-height: 1.75;
+            max-width: 720px;
+        }
+
+        .box-subheader {
+            font-family: 'Lora', serif;
+            font-size: 1.4rem;
+            color: #fff;
+            line-height: 1.3;
+            max-width: 720px;
+            margin-top: 1rem;
+            opacity: 0.95;
+        }
+
+        .box-list {
+            margin-top: 1.25rem;
+            margin-left: 1.25rem;
+            color: #fff;
+            list-style-type: circle;
+            font-family: Arial, sans-serif;
+            font-size: 1rem;
+            line-height: 1.75;
+        }
+
+        .box-list li {
+            margin-bottom: 0.75rem;
+        }
+
+        .box-list-description {
+            margin-top: 0.75rem;
+            margin-left: 1.25rem;
+            font-family: Arial, sans-serif;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.88);
+            line-height: 1.75;
+            max-width: 720px;
+        }
+
+        .box-list-description-smaller {
+            margin-top: 0.5rem;
+            margin-left: 1.25rem;
+            font-family: Arial, sans-serif;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.88);
+            line-height: 1.75;
+            max-width: 720px;
+        }
+
+        .info-bar {
+            width: min(100%, 1180px);
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            border-radius: 28px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 24px 40px rgba(0, 0, 0, 0.16);
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        .info-bar-header {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.06em;
+        }
+
+        .contact-info-list {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            color: #fff;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .contact-info-list li {
+            margin-bottom: 0.85rem;
+        }
+
+        .contact-info-list a {
+            color: #fff;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .contact-info-note {
+            margin-top: 1.25rem;
+            font-size: 0.98rem;
+            color: rgba(255, 255, 255, 0.88);
+            max-width: 820px;
+            line-height: 1.75;
+        }
+
+        .contact-info-note a {
+            color: #fff;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .box-link-arrow {
+            margin-top: 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Times New Roman', serif;
+            font-size: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 999px;
+            padding: 0.85rem 1.25rem;
+            background: rgba(255, 255, 255, 0.08);
+            transition: background 0.25s ease, transform 0.25s ease;
+        }
+
+        .box-link-arrow:hover,
+        .box-link-arrow:focus {
+            background: rgba(255, 255, 255, 0.18);
+            transform: translateY(-1px);
+        }
+
+        .box-link-arrow span {
+            font-size: 1.1rem;
+        }
+
+        .urdu-text {
+            font-family: 'Gulzar', serif;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.88);
+            line-height: 2;
+            max-width: 720px;
+            margin-top: 1.5rem;
+            direction: rtl;
+            unicode-bidi: embed;
+            text-align: right;
+        }
+
+        .box-bottom-text {
+            font-family: Arial, sans-serif;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.78);
+            line-height: 1.75;
+            margin-top: 1rem;
+            max-width: 720px;
+        }
+
+        .divider {
+            background: rgb(90, 83, 83, 0.12);
+            color: #e1d1ff;
+            border-radius: 32px;
+            padding: 4rem 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            font-size: 1.8rem;
+            letter-spacing: 0.03em;
+            text-align: left;
+            min-height: 420px;
+            max-width: 820px;
+            width: min(95%, 820px);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+
+        @media (max-width: 900px) {
+            body {
+                padding: 1rem;
+            }
+
+            .status-bar,
+            .info-bar {
+                padding: 1rem;
+            }
+
+            .status-left {
+                gap: 1rem;
+            }
+
+            .status-bar,
+            .info-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .status-item {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .status-link,
+            .register-button,
+            .home-button,
+            .box-link-arrow {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .header-title {
+                font-size: 2rem;
+            }
+
+            .box-heading {
+                font-size: 2.2rem;
+            }
+
+            .divider {
+                padding: 3rem 1.75rem;
+                min-height: auto;
+            }
+
+            .box-subtext,
+            .box-list,
+            .box-list-description,
+            .box-list-description-smaller,
+            .contact-info-note {
+                font-size: 0.95rem;
+            }
+
+            .contact-info-list {
+                margin-left: 1rem;
+            }
+
+            .section {
+                padding: 1.25rem 0;
+            }
+        }
+
+        @media (max-width: 520px) {
+            body {
+                padding: 0.8rem;
+            }
+
+            .status-bar,
+            .info-bar {
+                padding: 0.9rem;
+                border-radius: 24px;
+            }
+
+            .status-left {
+                gap: 0.75rem;
+            }
+
+            .status-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .status-link,
+            .register-button,
+            .home-button,
+            .box-link-arrow {
+                width: 100%;
+            }
+
+            .header-title {
+                font-size: 1.75rem;
+            }
+
+            .box-heading {
+                font-size: 1.9rem;
+            }
+
+            .divider {
+                padding: 2rem 1.25rem;
+            }
+
+            .header-space {
+                min-height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="status-bar">
+        <div class="status-left">
+            <div class="status-item"><a class="status-link" href="https://wa.me/923159687056" target="_blank" rel="noopener noreferrer"><span class="status-icon">☎</span> +92 315 9687056</a></div>
+            <div class="status-item"><a class="status-link" href="https://www.instagram.com/nzeewomendrivingacademy" target="_blank" rel="noopener noreferrer"><span class="status-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.056 1.97.24 2.427.403a4.92 4.92 0 0 1 1.72 1.045 4.92 4.92 0 0 1 1.045 1.72c.163.457.347 1.257.403 2.427.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.056 1.17-.24 1.97-.403 2.427a4.92 4.92 0 0 1-1.045 1.72 4.92 4.92 0 0 1-1.72 1.045c-.457.163-1.257.347-2.427.403-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.056-1.97-.24-2.427-.403a4.92 4.92 0 0 1-1.72-1.045 4.92 4.92 0 0 1-1.045-1.72c-.163-.457-.347-1.257-.403-2.427C2.175 15.747 2.163 15.367 2.163 12s.012-3.584.07-4.85c.056-1.17.24-1.97.403-2.427a4.92 4.92 0 0 1 1.045-1.72A4.92 4.92 0 0 1 5.401 2.636c.457-.163 1.257-.347 2.427-.403C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.736 0 8.332.012 7.053.07 5.775.128 4.678.314 3.75.649 2.807 1.0 2.027 1.486 1.314 2.2.6 2.913.114 3.693-.246 4.636c-.335.928-.521 2.025-.579 3.303C-.012 8.332 0 8.736 0 12c0 3.264.012 3.668.07 4.947.058 1.278.244 2.375.579 3.303.36.943.846 1.723 1.56 2.437.713.713 1.493 1.199 2.436 1.56.928.335 2.025.521 3.303.579 1.279.058 1.683.07 4.947.07s3.668-.012 4.947-.07c1.278-.058 2.375-.244 3.303-.579.943-.36 1.723-.846 2.437-1.56.713-.713 1.199-1.493 1.56-2.436.335-.928.521-2.025.579-3.303.058-1.279.07-1.683.07-4.947s-.012-3.668-.07-4.947c-.058-1.278-.244-2.375-.579-3.303-.36-.943-.846-1.723-1.56-2.437C20.793.846 20.013.36 19.07 0c-.928-.335-2.025-.521-3.303-.579C15.668.012 15.264 0 12 0z" fill="currentColor"/><path d="M12 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a3.999 3.999 0 1 1 0-7.998 3.999 3.999 0 0 1 0 7.998zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" fill="currentColor"/></svg></span> @nzeewomendrivingacademy</a></div>
+            <div class="status-item"><a class="status-link" href="services.html">Services</a></div>
+            <div class="status-item"><a class="status-link" href="course-details.html">Courses</a></div>
+            <div class="status-item"><a class="status-link" href="why-us.html">About Us</a></div>
+        </div>
+        <a class="register-button fade-item" href="https://forms.gle/AXvxvtF2m54bGFti6" target="_blank" rel="noopener noreferrer">Register Now</a>
+        <div class="status-dropdown" id="locationsDropdown">
+            <button class="status-dropdown-button fade-item" type="button" aria-haspopup="true" aria-expanded="false">Our Locations ▾</button>
+            <div class="status-dropdown-menu" role="menu">
+                <button class="status-dropdown-item" type="button" role="menuitem">B-17</button>
+                <button class="status-dropdown-item" type="button" role="menuitem">D-12</button>
+                <button class="status-dropdown-item" type="button" role="menuitem">E-11</button>
+                <button class="status-dropdown-item" type="button" role="menuitem">F-11</button>
+                <button class="status-dropdown-item" type="button" role="menuitem">F-10</button>
+                <button class="status-dropdown-item fade-item" type="button" role="menuitem" data-url="other-locations.html">Other Location</button>
+            </div>
+        </div>
+    </div>
+    <div class="header-space">
+        <div class="header-title fade-item">NZee's Women<br>Driving Academy</div>
+    </div>
+    <div class="section">
+        <div class="divider fade-item" style="min-height: 680px; padding: 5rem 3rem;">
+            <div>
+                <h2 class="box-heading">Drive With Confidence!</h2>
+                <p class="box-subtext">Welcome To NZee's Women Driving Academy, a Premier Driving School designed exclusively for Women. We combine expert road training with a supportive environment to transform anxious beginners into licensed, confident drivers.
+
+At our Academy, we believe that learning to drive is a milestone towards absolute independence. We understand that behind the wheel, safety and confidence go hand in hand. That's why we've built an academy specifically tailored to how women learn best - focusing on patience, thorough understanding, and real-world readiness.
+
+No judgement, and no rush. Only professional, expert guidance every single mile.</p>
+                <p class="urdu-text">خوش آمدید NZee's خواتین ڈرائیونگ اکیڈمی میں، ایک خصوصی ڈرائیونگ اسکول جو صرف خواتین کے لیے ڈیزائن کیا گیا ہے۔ ہم پیشہ ورانہ روڈ ٹریننگ کو ایک مددگار ماحول کے ساتھ ملاتے ہیں تاکہ نہایت ناتجربہ کار افراد کو لیسنس یافتہ اور پر اعتماد ڈرائیور بنایا جا سکے۔
+
+ہماری اکیڈمی میں ہمارا یقین ہے کہ گاڑی چلانا سیکھنا مکمل آزادی کی جانب ایک بڑا قدم ہے۔ ہم سمجھتے ہیں کہ وہیل کے پیچھے حفاظت اور اعتماد ایک ساتھ چلتے ہیں۔ اسی لیے ہم نے ایک ایسی اکیڈمی بنائی ہے جو خواتین کے سیکھنے کے انداز کے مطابق ہو - صبر، مکمل سمجھ اور حقیقی دنیا کی تیاری پر توجہ مرکوز کرتی ہے۔
+
+کوئی فیصلہ بازی نہیں، اور کوئی جلد بازی نہیں۔ ہر ایک میل میں صرف پیشہ ورانہ، ماہر رہنمائی۔</p>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="divider fade-item" style="min-height: 680px; padding: 5rem 3rem background rgba(90, 83, 83, 0.28);;">
+            <div>
+                <h2 class="box-heading">Our Services</h2>
+                <p class="box-subheader">Our comprehensive training designed for you.</p>
+                <ul class="box-list">
+                    <li>
+                        Theory and Hand's on Practice
+                        <p class="box-list-description">Master the rules of the road and essential traffic laws seamlessly alongside your practical, behind-the-wheel training.</p>
+                    </li>
+                    <li>
+                        Real-World Traffic Experience
+                        <p class="box-list-description-smaller">Skip the empty parking lots. We take you onto real roads to master busy intersections, highways, and manage tight parking spaces.</p>
+                    </li>
+                    <li>
+                        Guaranteed Test Preperation
+                        <p class="box-list-description-smaller">Conquer test days with lessons modeled exactly after licensing test, backed by our fully successful guarantee.</p>
+                    </li>
+                </ul>
+            </div>
+            <a href="services.html" class="box-link-arrow">Services <span>→</span></a>
+        </div>
+    </div>
+    <div class="section">
+        <div class="divider fade-item" style="min-height: 680px; padding: 5rem 3rem;">
+            <div>
+                <h2 class="box-heading">Courses</h2>
+                <ul class="box-list">
+                    <li>
+                        Beginner’s Course
+                        <p class="box-list-description">Turn your driving anxiety into complete road confidence with our step-by-step foundational training.</p>
+                    </li>
+                    <li>
+                        Refresher Course
+                        <p class="box-list-description-smaller">Perfect your parking, conquer highway driving, and brush up on your skills with a friendly instructor.</p>
+                    </li>
+                    <li>
+                        Defensive Driving
+                        <p class="box-list-description-smaller">Learn advanced safety maneuvers and hazard awareness to keep safe and drive with confidence.</p>
+                    </li>
+                </ul>
+            </div>
+            <a href="course-details.html" class="box-link-arrow">Course Details <span>→</span></a>
+        </div>
+    </div>
+    <div class="section">
+        <div class="divider fade-item" style="min-height: 680px; padding: 5rem 3rem;">
+            <div>
+                <h2 class="box-heading">“Why Us?”</h2>
+                <ul class="box-list">
+                    <li>
+                        Certified Female Instructors
+                        <p class="box-list-description">Learn from patient, professional, and highly qualified women who understand your journey and pace.</p>
+                    </li>
+                    <li>
+                        Safe, Empowering Space
+                        <p class="box-list-description-smaller">We eliminate the stress of learning. Our academy is built entirely around comfort, respect, and mutual support.</p>
+                    </li>
+                    <li>
+                        Flexible, Tailored Scheduling
+                        <p class="box-list-description-smaller">We fit into your busy life. Choose lesson times that work for your school, work, or family schedule.</p>
+                    </li>
+                </ul>
+                <p class="box-subtext">Why Choose Us: From amazingly controlled safety vehicles, both automatic and manual cars, to an entirely supportive women community, we design every detail with you in mind.</p>
+            </div>
+            <a href="why-us.html" class="box-link-arrow">Why Us <span>→</span></a>
+        </div>
+    </div>
+    <div class="info-bar fade-item">
+        <div class="info-bar-header">Contact Us</div>
+        <ul class="contact-info-list">
+            <li><a href="https://forms.gle/AXvxvtF2m54bGFti6" target="_blank" rel="noopener noreferrer">Ready to Start?</a> Register through our registration form.</li>
+            <li><a href="https://forms.gle/jb3AoLbKPAcBEbA17" target="_blank" rel="noopener noreferrer">Have Questions?</a> Visit our inquiry form for FAQ and support.</li>
+            <li><a href="other-locations.html">Find Our Locations</a> to see all academy branches and address details.</li>
+            <li><a href="https://forms.gle/iBTZP65tgxvT4iEm9" target="_blank" rel="noopener noreferrer">Found any bugs or glitches?</a> Report them here to help us improve.</li>
+        </ul>
+        <p class="contact-info-note">Reach out via <a href="https://wa.me/923159687056" target="_blank" rel="noopener noreferrer">WhatsApp</a>, call us, or DM us at <a href="https://www.instagram.com/nzeewomendrivingacademy" target="_blank" rel="noopener noreferrer">Instagram</a> today!</p>
+    </div>
+    <script>
+        const dropdown = document.getElementById('locationsDropdown');
+        const dropdownButton = dropdown.querySelector('.status-dropdown-button');
+        const dropdownMenu = dropdown.querySelector('.status-dropdown-menu');
+
+        const fadeItems = document.querySelectorAll('.fade-item');
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                entry.target.classList.toggle('visible', entry.isIntersecting);
+            });
+        }, { threshold: 0.15 });
+        fadeItems.forEach(item => fadeObserver.observe(item));
+
+        const commaListSources = document.querySelectorAll('.comma-list-source');
+        commaListSources.forEach(source => {
+            const items = source.textContent.split(',').map(text => text.trim()).filter(Boolean);
+            if (!items.length) return;
+
+            const list = document.createElement('ul');
+            list.className = 'box-list';
+            items.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                list.appendChild(li);
+            });
+
+            source.replaceWith(list);
+        });
+
+        dropdownButton.addEventListener('click', (event) => {
+            event.stopPropagation();
+            const isOpen = dropdown.classList.toggle('open');
+            dropdownButton.setAttribute('aria-expanded', isOpen);
+        });
+
+        dropdownMenu.addEventListener('click', (event) => {
+            event.stopPropagation();
+            if (event.target.matches('.status-dropdown-item')) {
+                const url = event.target.dataset.url;
+                if (url) {
+                    window.location.href = url;
+                    return;
+                }
+                dropdownButton.textContent = event.target.textContent + ' ▾';
+                dropdown.classList.remove('open');
+                dropdownButton.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!dropdown.contains(event.target)) {
+                dropdown.classList.remove('open');
+                dropdownButton.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                dropdown.classList.remove('open');
+                dropdownButton.setAttribute('aria-expanded', 'false');
+            }
+        });
+    </script>
+</body>
+</html>

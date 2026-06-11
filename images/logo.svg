@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" role="img" aria-labelledby="title desc">
+  <title id="title">NZEE'S Women Driving Academy Logo</title>
+  <desc id="desc">A circular gradient logo with a stylized car and academy text.</desc>
+  <defs>
+    <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7fe1d9" />
+      <stop offset="50%" stop-color="#5d9ce6" />
+      <stop offset="100%" stop-color="#6f9eec" />
+    </linearGradient>
+    <radialGradient id="backgroundGradient" cx="45%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#e9f7ff" />
+      <stop offset="100%" stop-color="#d9e9f7" />
+    </radialGradient>
+  </defs>
+
+  <circle cx="250" cy="250" r="230" fill="url(#backgroundGradient)" />
+  <circle cx="250" cy="250" r="216" fill="none" stroke="url(#ringGradient)" stroke-width="24" />
+
+  <g transform="translate(45 135)">
+    <path d="M106 112 Q136 36 205 36 H316 Q354 41 379 88 Q389 116 382 143 Q354 192 274 196 H144 Q119 191 104 166 Q94 146 104 112 Z" fill="#1a2735" />
+    <path d="M131 116 Q151 76 186 66 H276 Q311 68 336 106 Q346 126 336 146 Q326 166 301 182 Q251 204 176 196 Q146 192 131 166 Q124 142 131 116 Z" fill="#252f3d" />
+    <circle cx="161" cy="191" r="20" fill="#121a22" />
+    <circle cx="321" cy="191" r="20" fill="#121a22" />
+    <path d="M166 76 C186 61 246 36 316 76" fill="none" stroke="#121a22" stroke-width="12" stroke-linecap="round" />
+    <path d="M126 131 H346" fill="none" stroke="#121a22" stroke-width="10" stroke-linecap="round" opacity="0.6" />
+  </g>
+
+  <text x="250" y="318" text-anchor="middle" fill="#121a22" font-family="Georgia, serif" font-size="34" font-weight="700">NZEE'S WOMEN</text>
+  <text x="250" y="360" text-anchor="middle" fill="#121a22" font-family="Georgia, serif" font-size="26" font-weight="700">DRIVING ACADEMY</text>
+</svg>
